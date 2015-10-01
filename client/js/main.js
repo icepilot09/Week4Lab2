@@ -8,11 +8,11 @@ myBlogApp.config(function($routeProvider){
 	$routeProvider
 		.when('/',{
 			templateUrl: '../views/blogposts.html',
-			//controller: 'blogController'
+			controller: 'blogController'
 		})
-		.when('/newpost',{
+		.when('/newpost/',{
 			templateUrl: '../views/newpost.html',
-			//controller: 'newController'
+			controller: 'newController'
 		})
 		.otherwise({
 			redirectTo:'/'
