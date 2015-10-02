@@ -1,5 +1,5 @@
 //The action to call the parse service should be here.
-var myBlogApp = angular.module('myBlogApp.services', ['ngRoute', 'ngResource']);
+var myBlogApp = angular.module('myBlogApp.factories', ['ngRoute', 'ngResource']);
 
 myBlogApp.factory('Blog', ['$http', function($http) {
    var reqHeaders = { headers:  {
@@ -13,18 +13,10 @@ myBlogApp.factory('Blog', ['$http', function($http) {
 
        return $http.get('https://api.parse.com/1/classes/BlogPost/', reqHeaders);
    };
-   
-   ParseFactory.postItem = function(post) {
-       return $http.post('https://api.parse.com/1/classes/BlogPost/', { 
-           headers: reqHeaders
-           }
-           .catch(function(err){
-               console.log(err);
-           })
-           .then(function(response) {
-               // transform the promise of response into a promise of data
-               return response;
-           }));
+  
+   ParseFactory.postItems = function(data) {
+        return $http.post('https://api.parse.com/1/classes/BlogPost/', data, reqHeaders);
+
    };
    
  return ParseFactory;

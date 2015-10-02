@@ -1,7 +1,3 @@
-//Logic for page actions here. 
-
-//var myBlogApp = angular.module('ngResource',  [$scope, ParseData]);
-
 var myBlogApp = angular.module('myBlogApp.controllers', []);
 
 myBlogApp.controller('blogController', ['$scope', '$location', 'Blog', function ($scope, $location, Blog) {
@@ -27,7 +23,41 @@ myBlogApp.controller('blogController', ['$scope', '$location', 'Blog', function 
     
 }]);
 
-myBlogApp.controller('newController', ['$scope', '$location', 'Blog', '$ngResource', function ($scope, $location, Blog, $ngResource){
+myBlogApp.controller('writeBlogController', ['$scope', '$location', 'Blog', function ($scope, $location, Blog){
+    $scope.newPost = function() {
+        var post = {
+            title: $scope.title,
+            author: $scope.author,
+            content: $scope.content
+            
+        }
+        var postData = JSON.stringify(post);
+        Blog.postItems(postData)
+            .then(function (){
+                $location.path('/');
+            }) .catch(function(err){
+                console.log(err);
+            })
+    }
+  
+}]);
+
+
+
+
+
+    
+           // return $http.post('https://api.parse.com/1/classes/BlogPost/', { 
+        //    headers: reqHeaders
+        //    }
+        //    .catch(function(err){
+        //        console.log(err);
+        //    })
+        //    .then(function(response) {
+        //        // transform the promise of response into a promise of data
+        //        return response;
+        //    }));
+
     // $scope.posts = [];
     // Blog.get().then (function(data) {
     //     $scope.items = data.data.results
@@ -51,12 +81,8 @@ myBlogApp.controller('newController', ['$scope', '$location', 'Blog', '$ngResour
     //         .error(function(err){
     //             console.error(err);
     //         });
- 
-    $scope.submit =function(){
-        $location.path('/blogposts/')
-    }
     
-}]);
+
 
 
 
